@@ -6,7 +6,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      available_power: 0
+      available_power: 0,
+      powerValue: '',
     };
   }
 
@@ -36,7 +37,26 @@ class App extends React.Component {
       });
   }
 
-  setPowerData = () => {}
+  updatePowerValue = (evt) => {
+    this.setState({
+      powerValue: evt.target.value
+    });
+  }
+
+  setPowerData(power) {
+    fetch("https://power.knst.me/set_power/" + power, {
+      'method': 'POST',
+  })
+      .then(response => response.json())
+      .then(function(data) {
+
+       console.log(data);
+
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 
   handleUpdateButton = () => {
     this.setState({available_power: 0})
@@ -44,7 +64,9 @@ class App extends React.Component {
   }
 
   handleSubmitButton = () => {
-    this.setPowerData()
+    this.setState({available_power: 0})
+    this.setPowerData(this.state.powerValue)
+    this.fetchPowerData()
   }
 
   render() {
@@ -56,7 +78,7 @@ class App extends React.Component {
           </Header>
           <Form>
             <Segment stacked>
-              <Form.Input fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
+              <Form.Input onChange={evt => this.updatePowerValue(evt)} fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
               <Grid divided='vertically'>
                 <GridRow columns={2}>
                   <Grid.Column>
