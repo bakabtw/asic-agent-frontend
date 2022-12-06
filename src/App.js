@@ -39,6 +39,7 @@ class App extends React.Component {
   setPowerData = () => {}
 
   handleUpdateButton = () => {
+    this.setState({available_power: 0})
     this.fetchPowerData()
   }
 
