@@ -59,14 +59,18 @@ class App extends React.Component {
   }
 
   handleUpdateButton = () => {
-    this.setState({available_power: 0})
+    this.resetPowerData()
     this.fetchPowerData()
   }
 
   handleSubmitButton = () => {
-    this.setState({available_power: 0})
+    this.resetPowerData()
     this.setPowerData(this.state.powerValue)
     this.fetchPowerData()
+  }
+
+  resetPowerData = () => {
+    this.setState({available_power: -1})
   }
 
   render() {
@@ -96,7 +100,7 @@ class App extends React.Component {
             </Segment>
           </Form>
           <Message>
-            Available power: {this.state.available_power == 0 ? 'Updating...' : this.state.available_power + 'W'}
+            Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
           </Message>
         </Grid.Column>
       </Grid>
