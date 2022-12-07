@@ -19,5 +19,5 @@ docker build -t asic-agent-frontend .
 
 ## Running docker image
 ```
-docker run -d -p asic-agent-frontend
+docker run -d -p 3000:80 asic-agent-frontend
 ```
