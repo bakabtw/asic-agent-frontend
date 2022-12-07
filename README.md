@@ -7,7 +7,7 @@ npm install
 npm start dev
 ```
 
-## Building pro
+## Building the app
 ```
 npm run build
 ```
