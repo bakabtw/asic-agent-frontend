@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = {
       available_power: -1,
       powerValue: '',
+      renderMessage: false
     };
   }
 
@@ -65,12 +66,30 @@ class App extends React.Component {
 
   handleSubmitButton = () => {
     this.resetPowerData()
+    this.updateRenderMessage(true)
     this.setPowerData(this.state.powerValue)
     this.fetchPowerData()
   }
 
   resetPowerData = () => {
     this.setState({available_power: -1})
+  }
+
+  renderMessage = (header) => {
+    if(this.state.renderMessage == true) {
+      this.timeoutID = setTimeout(() => this.updateRenderMessage(false), 5000);
+
+      return <Message success header={header} />
+    }
+    else {
+      return null
+    }
+  }
+
+  updateRenderMessage = (value) => {
+    this.setState({
+      renderMessage: value,
+    })
   }
 
   render() {
@@ -99,6 +118,7 @@ class App extends React.Component {
               </Grid>
             </Segment>
           </Form>
+          {this.renderMessage('Submitted power data successfully')}
           <Message>
             Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
           </Message>
