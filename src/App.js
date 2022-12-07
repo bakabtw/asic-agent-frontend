@@ -6,7 +6,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      available_power: 0,
+      available_power: -1,
       powerValue: '',
     };
   }
@@ -28,7 +28,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then((data) => {
 
-        console.log(data);
+        // console.log(data);
         this.setState({ available_power: data.power });
 
       })
@@ -50,7 +50,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(function(data) {
 
-       console.log(data);
+      //  console.log(data);
 
       })
       .catch(function(error) {

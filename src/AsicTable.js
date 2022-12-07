@@ -27,7 +27,7 @@ class AsicTable extends React.Component {
     .then(response => response.json())
     .then((data) => {
 
-      console.log(data);
+      // console.log(data);
       this.setState({
         tableValues: data
       });
@@ -55,7 +55,7 @@ class AsicTable extends React.Component {
 
           <Table.Body>
             {Object.keys(this.state.tableValues).map( key => 
-            <Table.Row>
+            <Table.Row key={this.state.tableValues[key]['id']}>
               <Table.Cell>{this.state.tableValues[key]['id']}</Table.Cell>
               <Table.Cell>{this.state.tableValues[key]['ip']}</Table.Cell>
               <Table.Cell>{this.state.tableValues[key]['power']}</Table.Cell>
