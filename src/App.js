@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       available_power: -1,
       powerValue: '',
-      renderMessage: false
+      messageQueue: [],
     }
 
     this.apiHost = process.env.REACT_APP_API_HOST
@@ -31,11 +31,10 @@ class App extends React.Component {
       .then(response => response.json())
       .then((data) => {
 
-        // console.log(data);
         this.setState({ available_power: data.power });
 
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -46,17 +45,17 @@ class App extends React.Component {
     });
   }
 
-  setPowerData(power) {
+  setPowerData = (power) => {
     fetch(this.apiHost + '/set_power/' + power, {
       'method': 'POST',
   })
       .then(response => response.json())
-      .then(function(data) {
+      .then((data) => {
 
-      //  console.log(data);
+        this.addMessage('success', 'Updated power data successfully', 5000)
 
       })
-      .catch(function(error) {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -68,7 +67,6 @@ class App extends React.Component {
 
   handleSubmitButton = () => {
     this.resetPowerData()
-    this.updateRenderMessage(true)
     this.setPowerData(this.state.powerValue)
     this.fetchPowerData()
   }
@@ -77,21 +75,26 @@ class App extends React.Component {
     this.setState({available_power: -1})
   }
 
-  renderMessage = (header) => {
-    if(this.state.renderMessage == true) {
-      this.timeoutID = setTimeout(() => this.updateRenderMessage(false), 5000);
-
-      return <Message success header={header} />
-    }
-    else {
-      return null
-    }
+  renderMessages = () => {
+    return (Object.keys(this.state.messageQueue).map( key => 
+      <Message key={key} className={this.state.messageQueue[key]['status']}>
+        {this.state.messageQueue[key]['message']}
+      </Message>
+      )
+    )
   }
 
-  updateRenderMessage = (value) => {
-    this.setState({
-      renderMessage: value,
-    })
+  addMessage = (status, message, timeout) => {
+    // TODO: checking status values
+    let id = this.state.messageQueue.push({status, message})
+
+    setTimeout(() => 
+      this.deleteMessage(id), timeout
+    )
+  }
+
+  deleteMessage = (id) => {
+    this.state.messageQueue.splice(id-1, 1)
   }
 
   render() {
@@ -120,7 +123,7 @@ class App extends React.Component {
               </Grid>
             </Segment>
           </Form>
-          {this.renderMessage('Submitted power data successfully')}
+          {this.renderMessages()}
           <Message>
             Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
           </Message>
