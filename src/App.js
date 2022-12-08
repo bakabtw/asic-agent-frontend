@@ -3,13 +3,15 @@ import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRo
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       available_power: -1,
       powerValue: '',
       renderMessage: false
-    };
+    }
+
+    this.apiHost = process.env.REACT_APP_API_HOST
   }
 
   componentDidMount() {
@@ -25,7 +27,7 @@ class App extends React.Component {
   }
 
   fetchPowerData = () => {
-    fetch('https://power.knst.me/get_power')
+    fetch(this.apiHost + '/get_power')
       .then(response => response.json())
       .then((data) => {
 
@@ -45,7 +47,7 @@ class App extends React.Component {
   }
 
   setPowerData(power) {
-    fetch("https://power.knst.me/set_power/" + power, {
+    fetch(this.apiHost + '/set_power/' + power, {
       'method': 'POST',
   })
       .then(response => response.json())
@@ -129,5 +131,3 @@ class App extends React.Component {
 }
 
 export default App
-
-// TODO: Add form validation

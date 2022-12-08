@@ -3,11 +3,13 @@ import { Grid, Table } from 'semantic-ui-react'
 
 class AsicTable extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       tableValues: {}
-    };
+    }
+
+    this.apiHost = process.env.REACT_APP_API_HOST
   }
 
   componentDidMount() {
@@ -23,7 +25,7 @@ class AsicTable extends React.Component {
   }
 
   updateTable = () => {
-    fetch('https://power.knst.me/asic_status')
+    fetch(this.apiHost + '/asic_status')
     .then(response => response.json())
     .then((data) => {
 
