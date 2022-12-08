@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react'
+import './Components/AppMessages'
+import AppMessages from './Components/AppMessages'
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class App extends React.Component {
     this.state = {
       available_power: -1,
       powerValue: '',
-      messageQueue: [],
+      messageQueue: []
     }
 
     this.apiHost = process.env.REACT_APP_API_HOST
@@ -76,29 +78,20 @@ class App extends React.Component {
     this.setState({available_power: -1})
   }
 
-  renderMessages = () => {
-    return (Object.keys(this.state.messageQueue).map( key => 
-      <Message key={key} className={this.state.messageQueue[key]['status']}>
-        {this.state.messageQueue[key]['message']}
-      </Message>
-      )
-    )
-  }
-
-  addMessage = (status, message, timeout=5000) => {
+  addMessage = (status, message, timeout = 5000) => {
     // TODO: checking status values
-    let id = this.state.messageQueue.push({status, message})
+    let id = this.state.messageQueue.push({ status, message })
 
-    setTimeout(() => 
+    setTimeout(() =>
       this.deleteMessage(id), timeout
     )
   }
 
   deleteMessage = (id) => {
-    this.state.messageQueue.splice(id-1, 1)
+    this.state.messageQueue.splice(id - 1, 1)
   }
 
-  render() {
+  render = () => {
     return (
       <Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -124,7 +117,7 @@ class App extends React.Component {
               </Grid>
             </Segment>
           </Form>
-          {this.renderMessages()}
+          <AppMessages messageQueue={this.state.messageQueue} />
           <Message>
             Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
           </Message>
