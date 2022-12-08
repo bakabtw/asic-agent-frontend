@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react'
-import './Components/AppMessages'
 import AppMessages from './Components/AppMessages'
 
 class App extends React.Component {
