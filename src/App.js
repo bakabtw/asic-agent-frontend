@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react'
 import AppMessages from './Components/AppMessages'
+import MessageQueue from './MessageQueue';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,8 +10,9 @@ class App extends React.Component {
     this.state = {
       available_power: -1,
       powerValue: '',
-      messageQueue: []
     }
+
+    this.messageQueue = new MessageQueue();
 
     this.apiHost = process.env.REACT_APP_API_HOST
   }
@@ -32,7 +34,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then((data) => {
 
-        if(data['success'] == true) { this.setState({ available_power: data.power }) }
+        if (data['success'] == true) { this.setState({ available_power: data.power }) }
         else { this.addMessage('warning', 'Error updating data: ' + data['detail']) }
 
       })
@@ -50,11 +52,11 @@ class App extends React.Component {
   setPowerData = (power) => {
     fetch(this.apiHost + '/set_power/' + power, {
       'method': 'POST',
-  })
+    })
       .then(response => response.json())
       .then((data) => {
-        
-        if(data['success'] == true) { this.addMessage('success', 'Submitted power data successfully') }
+
+        if (data['success'] == true) { this.addMessage('success', 'Submitted power data successfully') }
         else { this.addMessage('warning', 'Error submitting data: ' + data['detail']) }
       })
       .catch((error) => {
@@ -74,20 +76,7 @@ class App extends React.Component {
   }
 
   resetPowerData = () => {
-    this.setState({available_power: -1})
-  }
-
-  addMessage = (status, message, timeout = 5000) => {
-    // TODO: checking status values
-    let id = this.state.messageQueue.push({ status, message })
-
-    setTimeout(() =>
-      this.deleteMessage(id), timeout
-    )
-  }
-
-  deleteMessage = (id) => {
-    this.state.messageQueue.splice(id - 1, 1)
+    this.setState({ available_power: -1 })
   }
 
   render = () => {
@@ -116,7 +105,7 @@ class App extends React.Component {
               </Grid>
             </Segment>
           </Form>
-          <AppMessages messageQueue={this.state.messageQueue} />
+          <AppMessages queue={this.messageQueue.getMessages} />
           <Message>
             Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
           </Message>
