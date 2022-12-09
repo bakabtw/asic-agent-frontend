@@ -35,7 +35,7 @@ class MessageQueue {
     }
 
     deleteMessage = (id) => {
-        this.messageQueue.splice(id - 1, 1);
+        this.queue.splice(id - 1, 1);
     }
 
     get getMessages() {
