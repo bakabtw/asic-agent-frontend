@@ -12,6 +12,6 @@ const Header = () => (
       <Menu.Item as="a">CRUD</Menu.Item>
     </Container>
   </Menu>
-)
+);
 
-export default Header
+export default Header;

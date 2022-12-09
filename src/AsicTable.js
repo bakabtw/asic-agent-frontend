@@ -1,15 +1,15 @@
-import React from 'react'
-import { Grid, Table } from 'semantic-ui-react'
+import React from 'react';
+import { Grid, Table } from 'semantic-ui-react';
 
 class AsicTable extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       tableValues: {}
-    }
+    };
 
-    this.apiHost = process.env.REACT_APP_API_HOST
+    this.apiHost = process.env.REACT_APP_API_HOST;
   }
 
   componentDidMount() {
@@ -17,12 +17,12 @@ class AsicTable extends React.Component {
       () => this.updateTable(), 5000
     );
 
-    this.updateTable()
+    this.updateTable();
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
-  }
+  };
 
   updateTable = () => {
     fetch(this.apiHost + '/asic_status')
@@ -71,8 +71,8 @@ class AsicTable extends React.Component {
           </Table.Body>
         </Table>
       </Grid>
-    )
+    );
   }
 }
 
-export default AsicTable
+export default AsicTable;

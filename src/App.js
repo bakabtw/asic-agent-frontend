@@ -1,24 +1,24 @@
-import React from 'react'
-import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react'
-import AppMessages from './Components/AppMessages'
+import React from 'react';
+import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react';
+import AppMessages from './Components/AppMessages';
 import MessageQueue from './MessageQueue';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      available_power: -1,
+      availablePower: -1,
       powerValue: '',
-    }
+    };
 
     this.messageQueue = new MessageQueue();
 
-    this.apiHost = process.env.REACT_APP_API_HOST
+    this.apiHost = process.env.REACT_APP_API_HOST;
   }
 
   componentDidMount() {
-    this.fetchPowerData()
+    this.fetchPowerData();
 
     this.timerID = setInterval(
       () => this.fetchPowerData(), 5000
@@ -34,7 +34,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then((data) => {
 
-        if (data['success'] == true) { this.setState({ available_power: data.power }) }
+        if (data['success'] == true) { this.setState({ availablePower: data.power }) }
         else { this.messageQueue.addMessage('warning', 'Error updating data: ' + data['detail']) }
 
       })
@@ -65,18 +65,18 @@ class App extends React.Component {
   }
 
   handleUpdateButton = () => {
-    this.resetPowerData()
-    this.fetchPowerData()
+    this.resetPowerData();
+    this.fetchPowerData();
   }
 
   handleSubmitButton = () => {
-    this.resetPowerData()
-    this.setPowerData(this.state.powerValue)
-    this.fetchPowerData()
+    this.resetPowerData();
+    this.setPowerData(this.state.powerValue);
+    this.fetchPowerData();
   }
 
   resetPowerData = () => {
-    this.setState({ available_power: -1 })
+    this.setState({ availablePower: -1 });
   }
 
   render = () => {
@@ -107,12 +107,12 @@ class App extends React.Component {
           </Form>
           <AppMessages queue={this.messageQueue.getMessages} />
           <Message>
-            Available power: {this.state.available_power < 0 ? 'Updating...' : this.state.available_power + 'W'}
+            Available power: {this.state.availablePower < 0 ? 'Updating...' : this.state.availablePower + 'W'}
           </Message>
         </Grid.Column>
       </Grid>
-    )
+    );
   }
 }
 
-export default App
+export default App;
