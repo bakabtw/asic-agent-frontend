@@ -1,20 +1,7 @@
 import { action, computed, makeObservable, observable } from "mobx";
 
 class MessageQueue {
-    queue = [
-        {
-            'status': 'success',
-            'message': 'Success'
-        },
-        {
-            'status': 'warning',
-            'message': 'Warning'
-        },
-        {
-            'status': 'success',
-            'message': 'ABCD'
-        }
-    ];
+    queue = [];
 
     constructor() {
         makeObservable(this, {

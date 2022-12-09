@@ -35,11 +35,11 @@ class App extends React.Component {
       .then((data) => {
 
         if (data['success'] == true) { this.setState({ available_power: data.power }) }
-        else { this.addMessage('warning', 'Error updating data: ' + data['detail']) }
+        else { this.messageQueue.addMessage('warning', 'Error updating data: ' + data['detail']) }
 
       })
       .catch((error) => {
-        this.addMessage('warning', 'Error updating data: ' + error)
+        this.messageQueue.addMessage('warning', 'Error updating data: ' + error)
       });
   }
 
@@ -56,11 +56,11 @@ class App extends React.Component {
       .then(response => response.json())
       .then((data) => {
 
-        if (data['success'] == true) { this.addMessage('success', 'Submitted power data successfully') }
-        else { this.addMessage('warning', 'Error submitting data: ' + data['detail']) }
+        if (data['success'] == true) { this.messageQueue.addMessage('success', 'Submitted power data successfully') }
+        else { this.messageQueue.addMessage('warning', 'Error submitting data: ' + data['detail']) }
       })
       .catch((error) => {
-        this.addMessage('warning', 'Error submitting data: ' + error)
+        this.messageQueue.addMessage('warning', 'Error submitting data: ' + error)
       });
   }
 
