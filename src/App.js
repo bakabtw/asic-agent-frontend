@@ -14,7 +14,7 @@ class App extends React.Component {
 
     this.messageQueue = new MessageQueue();
 
-    this.apiHost = process.env.REACT_APP_API_HOST;
+    this.apiHost = process.env.REACT_APP_API_HOST ? process.env.REACT_APP_API_HOST : 'http://127.0.0.1:8000';
   }
 
   componentDidMount() {
