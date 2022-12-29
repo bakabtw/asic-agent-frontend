@@ -57,8 +57,21 @@ const App = () => {
   }
 
   const addMessage = (status, message) => {
+    const id = messageQueue.length + 1;
+
     setMessageQueue(
-      messageQueue => [...messageQueue, { status, message }]
+      messageQueue => [...messageQueue, { id, status, message }]
+    );
+
+    setTimeout(() => {
+      deleteMessage(id);
+    }, 3000
+    );
+  }
+
+  const deleteMessage = (id) => {
+    setMessageQueue(
+      messageQueue.filter(item => item.id !== id)
     );
   }
 
