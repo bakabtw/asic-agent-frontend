@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react';
 import AppMessages from './Components/AppMessages';
-import MessagesContext from './MessagesContext';
 
 const App = () => {
   const [availablePower, setAvailablePower] = useState(-1);
@@ -62,11 +61,6 @@ const App = () => {
     setMessageQueue(
       messageQueue => [...messageQueue, { id, status, message }]
     );
-
-    setTimeout(() => {
-      deleteMessage(id);
-    }, 3000
-    );
   }
 
   const deleteMessage = (id) => {
@@ -83,38 +77,36 @@ const App = () => {
   }, []);
 
   return (
-    <MessagesContext.Provider value={messageQueue}>
-      <Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as='h2' color='teal' textAlign='center'>
-            <Image src='/logo512.png' /> ASIC power dashboard
-          </Header>
-          <Form>
-            <Segment stacked>
-              <Form.Input onChange={evt => setPowerValue(evt.target.value)} fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
-              <Grid divided='vertically'>
-                <GridRow columns={2}>
-                  <Grid.Column>
-                    <Button onClick={evt => handleSubmitButton()} fluid color='teal' size='large'>
-                      Submit
-                    </Button>
-                  </Grid.Column>
-                  <GridColumn>
-                    <Button onClick={evt => handleUpdateButton()} fluid color='grey' size='large'>
-                      Update
-                    </Button>
-                  </GridColumn>
-                </GridRow>
-              </Grid>
-            </Segment>
-          </Form>
-          <AppMessages />
-          <Message>
-            Available power: {availablePower < 0 ? 'Updating...' : availablePower + 'W'}
-          </Message>
-        </Grid.Column>
-      </Grid>
-    </MessagesContext.Provider>
+    <Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='teal' textAlign='center'>
+          <Image src='/logo512.png' /> ASIC power dashboard
+        </Header>
+        <Form>
+          <Segment stacked>
+            <Form.Input onChange={evt => setPowerValue(evt.target.value)} fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
+            <Grid divided='vertically'>
+              <GridRow columns={2}>
+                <Grid.Column>
+                  <Button onClick={evt => handleSubmitButton()} fluid color='teal' size='large'>
+                    Submit
+                  </Button>
+                </Grid.Column>
+                <GridColumn>
+                  <Button onClick={evt => handleUpdateButton()} fluid color='grey' size='large'>
+                    Update
+                  </Button>
+                </GridColumn>
+              </GridRow>
+            </Grid>
+          </Segment>
+        </Form>
+        <AppMessages queue={messageQueue} deleteMessage={deleteMessage} />
+        <Message>
+          Available power: {availablePower < 0 ? 'Updating...' : availablePower + 'W'}
+        </Message>
+      </Grid.Column>
+    </Grid>
   );
 }
 

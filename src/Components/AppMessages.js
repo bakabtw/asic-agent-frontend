@@ -1,17 +1,21 @@
 import React, { useContext } from 'react';
 import { Message } from 'semantic-ui-react';
-import MessagesContext from '../MessagesContext';
 
-const AppMessages = () => {
-  const queue = useContext(MessagesContext);
+const AppMessages = (props) => {
+  const queue = props.queue;
+
+  const handleClose = (id) => {
+    props.deleteMessage(id);
+  }
 
   return (
     Object.keys(queue).map(key =>
-      (
-        <Message key={key} className={queue[key]['status']}>
-          {queue[key]['message']}
-        </Message>
-      )
+    (
+      <Message key={key} className={queue[key]['status']}>
+        <p>ID: {queue[key]['id']} | {queue[key]['message']}</p>
+        <button onClick={evt => handleClose(queue[key]['id'])}>Close</button>
+      </Message >
+    )
     )
   );
 }
