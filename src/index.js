@@ -5,14 +5,14 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './App';
 import Header from './Header';
 import reportWebVitals from './reportWebVitals';
-import AsicTable from './AsicTable';
+// import AsicTable from './AsicTable';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
     <App />
-    <AsicTable />
+    {/* <AsicTable /> */}
   </React.StrictMode>
 );
 

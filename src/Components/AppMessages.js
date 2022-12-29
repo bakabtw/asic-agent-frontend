@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Message } from 'semantic-ui-react';
+import MessagesContext from '../MessagesContext';
 
-const AppMessages = (props) => {
-  const queue = props.queue;
+const AppMessages = () => {
+  const queue = useContext(MessagesContext);
 
   return (
     Object.keys(queue).map(key =>

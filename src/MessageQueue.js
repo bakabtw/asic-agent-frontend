@@ -1,15 +1,6 @@
-import { action, computed, makeObservable, observable } from "mobx";
-
 class MessageQueue {
-    queue = [];
-
     constructor() {
-        makeObservable(this, {
-            queue: observable,
-            addMessage: action,
-            deleteMessage: action,
-            getMessages: computed
-        });
+        this.queue = [];
     }
 
     addMessage = (status, message, timeout = 5000) => {
@@ -25,8 +16,8 @@ class MessageQueue {
         this.queue.splice(id - 1, 1);
     }
 
-    get getMessages() {
-        return(this.queue);
+    getMessages() {
+        return this.queue;
     }
 }
 
