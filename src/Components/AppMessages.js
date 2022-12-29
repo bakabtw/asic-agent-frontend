@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Message } from 'semantic-ui-react';
 
 const AppMessages = (props) => {
