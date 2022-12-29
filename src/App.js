@@ -4,7 +4,7 @@ import AppMessages from './Components/AppMessages';
 import MessagesContext from './MessagesContext';
 
 const App = () => {
-  const [availablePower, setAvailablePower] = useState('');
+  const [availablePower, setAvailablePower] = useState(-1);
   const [powerValue, setPowerValue] = useState('');
   const [messageQueue, setMessageQueue] = useState([]);
   const apiHost = process.env.REACT_APP_API_HOST ? process.env.REACT_APP_API_HOST : 'https://power.knst.me/api';
@@ -58,12 +58,15 @@ const App = () => {
 
   const addMessage = (status, message) => {
     setMessageQueue(
-      messageQueue => [...messageQueue, {status, message}]
+      messageQueue => [...messageQueue, { status, message }]
     );
   }
 
   useEffect(() => {
-    getPowerData();
+    const interval = setInterval(() => {
+      getPowerData();
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
