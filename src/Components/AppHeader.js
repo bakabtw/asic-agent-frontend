@@ -8,12 +8,12 @@ const AppHeader = () => {
   return (
     <Menu fixed="top" inverted={!theme}>
       <Container>
-        <Menu.Item as="a" header>
+        <Menu.Item as="a" header href="/">
           <Image size="mini" src="/logo512.png" style={{ marginRight: '1.5em' }} />
           ASIC power dashboard
         </Menu.Item>
         <Menu.Item as="a" href="/">Home</Menu.Item>
-        <Menu.Item as="a" href="/crud/">CRUD</Menu.Item>
+        <Menu.Item as="a" href="/crud/">Add ASIC</Menu.Item>
       </Container>
     </Menu >
   );

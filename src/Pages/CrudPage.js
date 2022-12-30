@@ -3,7 +3,16 @@ import { Grid, Header, Image, Form, Segment } from 'semantic-ui-react';
 import AppMessages from '../Components/AppMessages';
 
 const CrudPage = (props) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    'id': 0,
+    'ip': '',
+    'port': '',
+    'username': '',
+    'password': '',
+    'type': '',
+    'power': '',
+    'phase': ''
+  });
   const [loadingForm, setLoadingForm] = useState(false);
 
   const handleSubmitButton = () => {
@@ -54,6 +63,7 @@ const CrudPage = (props) => {
         </Header>
         <Segment stacked>
           <Form loading={loadingForm}>
+            <Form.Input name='id' value={formData['id']} fluid type='hidden' />
             <Form.Group widths='equal'>
               <Form.Input onChange={handleInputChange} name='ip' fluid label='IP' placeholder='ASIC API IP' />
               <Form.Input onChange={handleInputChange} name='port' fluid label='Port' placeholder='ASIC API port' />
