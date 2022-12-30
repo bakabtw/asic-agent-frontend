@@ -53,7 +53,7 @@ const AsicTable = (props) => {
               <Table.Cell className={tableValues[key]['online'] === 'True' ? '' : 'negative'}>
                 {tableValues[key]['online'] === 'True' ? 'Online' : 'Offline'}
               </Table.Cell>
-              <Table.Cell style={{ maxWidth: '90px' }}>
+              <Table.Cell style={{ maxWidth: '250px', minWidth: '180px' }}>
                 <Grid textAlign='center'>
                   <Button href={'/edit/' + tableValues[key]['id']} icon labelPosition='left' floated='left' size='mini'>
                     <Icon name='edit' />
