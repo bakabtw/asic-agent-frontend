@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Menu, Image } from "semantic-ui-react";
 
-const Header = () => (
+const AppHeader = () => (
   <Menu fixed="top" inverted>
     <Container>
       <Menu.Item as="a" header>
@@ -14,4 +14,4 @@ const Header = () => (
   </Menu>
 );
 
-export default Header;
+export default AppHeader;
