@@ -5,7 +5,7 @@ import AsicCrudComponent from '../Components/AsicCrudComponent';
 const CrudPage = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) => {
   const params = useParams();
   const [asicData, setAsicData] = useState({
-    'id': '',
+    'id': 0,
     'ip': '',
     'port': '',
     'username': '',
@@ -34,7 +34,7 @@ const CrudPage = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) 
   }, []);
 
   return (
-    <AsicCrudComponent asicData={asicData} apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
+    <AsicCrudComponent action={action} asicData={asicData} apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
   );
 }
 
