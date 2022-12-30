@@ -39,7 +39,7 @@ const DeleteConfimation = ({ apiHost, addMessage, deleteMessage, messageQueue })
 					<Image src='/delete_confirmation.jpeg' style={{ padding: '1em 0em 3em 0em' }} centered />
 					<Grid textAlign='center' style={{ padding: '2em 0em 2em 0em' }}>
 						<Button onClick={handleYesButton} negative>Yes, delete it</Button>
-						<Button onClick={() => navigate(-1)} positive>No, take me back</Button>
+						<Button onClick={() => navigate('/')} positive>No, take me back</Button>
 					</Grid>
 				</Segment>
 				<AppMessages queue={messageQueue} deleteMessage={deleteMessage} />
