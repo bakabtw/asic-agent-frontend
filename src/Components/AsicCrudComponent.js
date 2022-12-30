@@ -71,7 +71,7 @@ const AsicCrudComponent = ({ asicData, apiHost, addMessage, deleteMessage, messa
                 fluid
                 label='ASIC model'
                 options={[
-                  { key: 'type1', text: 'Innosilicon T2T 37Th/s', value: '1' },
+                  { key: 'type1', text: 'DragonAPI', value: 'DragonAPI' },
                 ]}
                 placeholder='ASIC model'
               />
