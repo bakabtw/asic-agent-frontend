@@ -1,7 +1,30 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Segment, Grid, Header, Container, Divider } from 'semantic-ui-react';
 import CrudPage from './CrudPage';
 
 const AsicStats = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
+  const [stats, setStats] = useState({});
+  const params = useParams();
+
+  const getStats = () => {
+    fetch(apiHost + '/get_stats/' + params.asicID)
+      .then((response) => response.json())
+      .then((data) => {
+
+        if (!data['detail']) { setStats(data); }
+        else { addMessage('warning', 'Error updating table data: ' + data['detail']); }
+
+      })
+      .catch((error) => {
+        addMessage('warning', 'Error updating table data: ' + error);
+      });
+  }
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
   return (
     <>
       <CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
