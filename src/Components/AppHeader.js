@@ -13,7 +13,7 @@ const AppHeader = () => {
           ASIC power dashboard
         </Menu.Item>
         <Menu.Item as="a" href="/">Home</Menu.Item>
-        <Menu.Item as="a" href="/crud/">Add ASIC</Menu.Item>
+        <Menu.Item as="a" href="/add">Add ASIC</Menu.Item>
       </Container>
     </Menu >
   );
