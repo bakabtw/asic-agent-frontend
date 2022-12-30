@@ -12,7 +12,7 @@ const AsicTable = (props) => {
   }, []);
 
   const updateTable = () => {
-    fetch(props.apiHost + '/asic_statuss')
+    fetch(props.apiHost + '/asic_status')
       .then((response) => response.json())
       .then((data) => {
 
