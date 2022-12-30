@@ -13,10 +13,10 @@ const AsicTable = (props) => {
 
   const updateTable = () => {
     fetch(props.apiHost + '/asic_status')
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((data) => {
 
-        if (data.ok) { setTableValues(data); }
+        if (!data['detail']) { setTableValues(data); }
         else { props.addMessage('warning', 'Error updating table data: ' + data['detail']); }
 
       })
