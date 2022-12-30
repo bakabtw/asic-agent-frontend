@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppHeader from './Components/AppHeader';
 import MainPage from './Pages/MainPage';
 import CrudPage from './Pages/CrudPage';
+import NotFound from './Pages/NotFound';
 import ThemeContext from './Context/ThemeContext';
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/add' element={<CrudPage action='add' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='/edit/:asicID' element={<CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='/delete/:asicID' element={<CrudPage action='delete' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          <Route path='*' element={<NotFound />}/>
         </Routes>
       </BrowserRouter>
     </ThemeContext.Provider>
