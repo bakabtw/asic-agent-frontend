@@ -35,7 +35,6 @@ const App = () => {
         <Routes>
           <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='/add' element={<CrudPage action='add' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-          <Route path='/edit/:asicID' element={<CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='/delete/:asicID' element={<DeleteConfirmation apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='/show/:asicID' element={<AsicStats apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
           <Route path='*' element={<NotFound />}/>

@@ -1,7 +1,7 @@
 import { Segment, Grid, Header, Container, Divider } from 'semantic-ui-react';
 import CrudPage from './CrudPage';
 
-const AsicStats = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) => {
+const AsicStats = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
   return (
     <>
       <CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
