@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppHeader from './Components/AppHeader';
 import MainPage from './Pages/MainPage';
 
@@ -23,7 +24,11 @@ const App = () => {
   return (
     <>
       <AppHeader />
-      <MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
