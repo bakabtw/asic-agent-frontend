@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Table } from 'semantic-ui-react';
+import { Grid, Button, Table, ButtonGroup, Icon, GridColumn } from 'semantic-ui-react';
 
 const AsicTable = (props) => {
   const [tableValues, setTableValues] = useState([]);
 
   useEffect(() => {
     updateTable();
-    
+
     const interval = setInterval(() => {
       updateTable();
     }, 5000);
@@ -38,6 +38,7 @@ const AsicTable = (props) => {
             <Table.HeaderCell>Phase</Table.HeaderCell>
             <Table.HeaderCell>Power group</Table.HeaderCell>
             <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Actions</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -51,6 +52,16 @@ const AsicTable = (props) => {
               <Table.Cell>{tableValues[key]['power_group']}</Table.Cell>
               <Table.Cell className={tableValues[key]['online'] === 'True' ? '' : 'negative'}>
                 {tableValues[key]['online'] === 'True' ? 'Online' : 'Offline'}
+              </Table.Cell>
+              <Table.Cell style={{ maxWidth: '90px' }}>
+                <Button href={'/edit/' + tableValues[key]['id']} icon labelPosition='left' floated='left'>
+                  <Icon name='edit' />
+                  Edit
+                </Button>
+                <Button href={'/delete/' + tableValues[key]['id']} icon negative labelPosition='right' floated='right'>
+                  Delete
+                  <Icon name='delete' />
+                </Button>
               </Table.Cell>
             </Table.Row>
           )}
