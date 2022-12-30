@@ -4,9 +4,8 @@ ARG HOST
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY . .
-RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-RUN REACT_APP_API_HOST=${HOST} npm run build
+RUN yarn install -g --silent
+RUN REACT_APP_API_HOST=${HOST} yarn run build
 
 # Production environment
 FROM nginx:stable-alpine
