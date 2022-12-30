@@ -28,7 +28,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-          <Route path='/crud' element={<CrudPage />} />
+          <Route path='/crud' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
         </Routes>
       </BrowserRouter>
     </>

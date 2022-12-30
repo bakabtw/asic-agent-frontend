@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Grid, Header, Image, Form, Segment } from 'semantic-ui-react';
+import AppMessages from '../Components/AppMessages';
 
-const CrudPage = () => {
-  const [formData, setFormData] = useState([]);
+const CrudPage = (props) => {
+  const [formData, setFormData] = useState({});
+  const [loadingForm, setLoadingForm] = useState(false);
 
   const handleSubmitButton = () => {
-    console.log('Handle submit button');
+    setLoadingForm(true);
+    sendForm();
+    setLoadingForm(false);
   }
 
   const handleInputChange = (event) => {
@@ -13,7 +17,6 @@ const CrudPage = () => {
     newFormData[event.target.name] = event.target.value;
 
     setFormData(newFormData);
-    console.log(formData);
   }
 
   const handleSelectChange = (e, data) => {
@@ -21,7 +24,26 @@ const CrudPage = () => {
     newFormData[data.name] = data.value;
 
     setFormData(newFormData);
-    console.log(formData);
+  }
+
+  const sendForm = () => {
+    fetch(props.apiHost + '/add_asic', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.json())
+      .then((data) => {
+
+        if (data['success'] === true) { props.addMessage('success', 'Submitted power data successfully') }
+        else { props.addMessage('warning', 'Error submitting data: ' + data['detail']) }
+      })
+      .catch((error) => {
+        props.addMessage('warning', 'Error submitting data: ' + error)
+      });
   }
 
   return (
@@ -31,7 +53,7 @@ const CrudPage = () => {
           <Image src='/logo512.png' /> ASIC power dashboard
         </Header>
         <Segment stacked>
-          <Form loading={false}>
+          <Form loading={loadingForm}>
             <Form.Group widths='equal'>
               <Form.Input onChange={handleInputChange} name='ip' fluid label='IP' placeholder='ASIC API IP' />
               <Form.Input onChange={handleInputChange} name='port' fluid label='Port' placeholder='ASIC API port' />
@@ -68,6 +90,7 @@ const CrudPage = () => {
             <Form.Button onClick={handleSubmitButton}>Submit</Form.Button>
           </Form>
         </Segment>
+        <AppMessages queue={props.messageQueue} deleteMessage={props.deleteMessage} />
       </Grid.Column>
     </Grid>
   );
