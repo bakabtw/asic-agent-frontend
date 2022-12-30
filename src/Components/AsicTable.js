@@ -5,6 +5,8 @@ const AsicTable = (props) => {
   const [tableValues, setTableValues] = useState([]);
 
   useEffect(() => {
+    updateTable();
+    
     const interval = setInterval(() => {
       updateTable();
     }, 5000);

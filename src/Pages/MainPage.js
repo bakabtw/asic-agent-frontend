@@ -55,6 +55,8 @@ const MainPage = (props) => {
   }
 
   useEffect(() => {
+    getPowerData();
+
     const interval = setInterval(() => {
       getPowerData();
     }, 5000);
