@@ -30,12 +30,54 @@ const AsicStats = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
       <CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
       <Grid textAlign='center' style={{ padding: '0em 0em 5em 0em' }}>
         <Segment>
+        <Header as='h1' textAlign='left'>Action buttons</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
           <Header as='h1' textAlign='left'>Temperature</Header>
           <Divider />
           <Container text style={{ padding: '10em 10em 10em 10em' }}>
 
           </Container>
           <Header as='h1' textAlign='left'>Hash rate</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
+          <Header as='h1' textAlign='left'>Pools</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
+          <Header as='h1' textAlign='left'>Network</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
+          <Header as='h1' textAlign='left'>Autotune</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+
+          </Container>
+          <Header as='h1' textAlign='left'>Errors</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+
+          </Container>
+          <Header as='h1' textAlign='left'>Logs</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
+          <Header as='h1' textAlign='left'>Debug logs</Header>
+          <Divider />
+          <Container text style={{ padding: '10em 10em 10em 10em' }}>
+
+          </Container>
+          <Header as='h1' textAlign='left'>Update firmware</Header>
           <Divider />
           <Container text style={{ padding: '10em 10em 10em 10em' }}>
 
