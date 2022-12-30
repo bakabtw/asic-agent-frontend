@@ -2,17 +2,8 @@ import { useState } from 'react';
 import { Grid, Header, Image, Form, Segment } from 'semantic-ui-react';
 import AppMessages from './AppMessages';
 
-const AsicCrudComponent = (props) => {
-  const [formData, setFormData] = useState({
-    'id': '',
-    'ip': '',
-    'port': '',
-    'username': '',
-    'password': '',
-    'type': '',
-    'power': '',
-    'phase': ''
-  });
+const AsicCrudComponent = ({ asicData, apiHost, addMessage, deleteMessage, messageQueue }) => {
+  const [formData, setFormData] = useState(asicData);
   const [loadingForm, setLoadingForm] = useState(false);
 
   const handleSubmitButton = () => {
@@ -36,7 +27,7 @@ const AsicCrudComponent = (props) => {
   }
 
   const sendForm = () => {
-    fetch(props.apiHost + '/add_asic', {
+    fetch(apiHost + '/update_asic', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -47,11 +38,11 @@ const AsicCrudComponent = (props) => {
       .then(response => response.json())
       .then((data) => {
 
-        if (data['success'] === true) { props.addMessage('success', 'Submitted power data successfully') }
-        else { props.addMessage('warning', 'Error submitting data: ' + data['detail']) }
+        if (data['success'] === true) { addMessage('success', 'Submitted power data successfully') }
+        else { addMessage('warning', 'Error submitting data: ' + data['detail']) }
       })
       .catch((error) => {
-        props.addMessage('warning', 'Error submitting data: ' + error)
+        addMessage('warning', 'Error submitting data: ' + error)
       });
   }
 
@@ -100,7 +91,7 @@ const AsicCrudComponent = (props) => {
             <Form.Button onClick={handleSubmitButton}>Submit</Form.Button>
           </Form>
         </Segment>
-        <AppMessages queue={props.messageQueue} deleteMessage={props.deleteMessage} />
+        <AppMessages queue={messageQueue} deleteMessage={deleteMessage} />
       </Grid.Column>
     </Grid>
   );

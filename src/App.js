@@ -31,7 +31,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-          <Route path='/crud/*' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          <Route path='/add' element={<CrudPage action='add' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          <Route path='/edit/:asicID' element={<CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          <Route path='/delete/:asicID' element={<CrudPage action='delete' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
         </Routes>
       </BrowserRouter>
     </ThemeContext.Provider>
