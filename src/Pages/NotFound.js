@@ -1,4 +1,4 @@
-import { Container, Grid, Header, Te } from 'semantic-ui-react';
+import { Container, Grid, Header } from 'semantic-ui-react';
 
 const NotFound = () => {
   return (
@@ -14,7 +14,7 @@ const NotFound = () => {
           <p>
             Try something fun!
           </p>
-          <p style={{fontSize: '300px'}}>
+          <p style={{ fontSize: '300px' }}>
             404
           </p>
         </Container>
