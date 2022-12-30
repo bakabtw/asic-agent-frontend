@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppHeader from './Components/AppHeader';
 import MainPage from './Pages/MainPage';
 import CrudPage from './Pages/CrudPage';
-import { Segment } from 'semantic-ui-react';
 import ThemeContext from './Context/ThemeContext';
 
 const App = () => {
@@ -28,15 +27,13 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <Segment inverted={theme}>
-        <AppHeader />
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-            <Route path='/crud/*' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-          </Routes>
-        </BrowserRouter>
-      </Segment>
+      <AppHeader />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          <Route path='/crud/*' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeContext.Provider>
   );
 }
