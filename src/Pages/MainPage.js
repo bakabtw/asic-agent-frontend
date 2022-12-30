@@ -6,8 +6,11 @@ import AsicTable from '../Components/AsicTable';
 const MainPage = (props) => {
   const [availablePower, setAvailablePower] = useState(-1);
   const [powerValue, setPowerValue] = useState('');
+  const [loadingForm, setLoadingForm] = useState(false);
 
   const getPowerData = () => {
+    setLoadingForm(true);
+
     fetch(props.apiHost + '/get_power')
       .then(response => response.json())
       .then((data) => {
@@ -21,7 +24,10 @@ const MainPage = (props) => {
       })
       .catch((error) => {
         props.addMessage('warning', 'Error updating data: ' + error)
-      });
+      })
+      .finally( () =>
+        setLoadingForm(false)
+      );
   }
 
   const sendPowerData = (power) => {
@@ -70,7 +76,7 @@ const MainPage = (props) => {
           <Header as='h2' color='teal' textAlign='center'>
             <Image src='/logo512.png' /> ASIC power dashboard
           </Header>
-          <Form>
+          <Form loading={loadingForm}>
             <Segment stacked>
               <Form.Input onChange={evt => setPowerValue(evt.target.value)} fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
               <Grid divided='vertically'>
