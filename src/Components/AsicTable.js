@@ -54,14 +54,16 @@ const AsicTable = (props) => {
                 {tableValues[key]['online'] === 'True' ? 'Online' : 'Offline'}
               </Table.Cell>
               <Table.Cell style={{ maxWidth: '90px' }}>
-                <Button href={'/edit/' + tableValues[key]['id']} icon labelPosition='left' floated='left'>
-                  <Icon name='edit' />
-                  Edit
-                </Button>
-                <Button href={'/delete/' + tableValues[key]['id']} icon negative labelPosition='right' floated='right'>
-                  Delete
-                  <Icon name='delete' />
-                </Button>
+                <Grid textAlign='center'>
+                  <Button href={'/edit/' + tableValues[key]['id']} icon labelPosition='left' floated='left' size='mini'>
+                    <Icon name='edit' />
+                    Edit
+                  </Button>
+                  <Button href={'/delete/' + tableValues[key]['id']} icon negative labelPosition='right' floated='right' size='mini'>
+                    Delete
+                    <Icon name='delete' />
+                  </Button>
+                </Grid>
               </Table.Cell>
             </Table.Row>
           )}
