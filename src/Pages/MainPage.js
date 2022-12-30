@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react';
 import AppMessages from '../Components/AppMessages';
 import AsicTable from '../Components/AsicTable';
+import ThemeContext from '../Context/ThemeContext';
 
 const MainPage = (props) => {
   const [availablePower, setAvailablePower] = useState(-1);
   const [powerValue, setPowerValue] = useState('');
   const [loadingForm, setLoadingForm] = useState(false);
+
+  const theme = useContext(ThemeContext);
 
   const getPowerData = () => {
     setLoadingForm(true);

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppHeader from './Components/AppHeader';
 import MainPage from './Pages/MainPage';
 import CrudPage from './Pages/CrudPage';
+import { Segment } from 'semantic-ui-react';
+import ThemeContext from './Context/ThemeContext';
 
 const App = () => {
   const [messageQueue, setMessageQueue] = useState([]);
   const apiHost = process.env.REACT_APP_API_HOST ? process.env.REACT_APP_API_HOST : 'https://power.knst.me/api';
+
+  const theme = useContext(ThemeContext);
 
   const addMessage = (status, message) => {
     const id = messageQueue.length + 1;
@@ -23,15 +27,17 @@ const App = () => {
   }
 
   return (
-    <>
-      <AppHeader />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-          <Route path='/crud/*' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <ThemeContext.Provider value={theme}>
+      <Segment inverted={theme}>
+        <AppHeader />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<MainPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+            <Route path='/crud/*' element={<CrudPage apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />} />
+          </Routes>
+        </BrowserRouter>
+      </Segment>
+    </ThemeContext.Provider>
   );
 }
 
