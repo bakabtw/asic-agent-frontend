@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Button, Table, ButtonGroup, Icon, GridColumn } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+import { Grid, Button, Table, Icon } from 'semantic-ui-react';
 
 const AsicTable = (props) => {
   const [tableValues, setTableValues] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     updateTable();
@@ -44,7 +46,7 @@ const AsicTable = (props) => {
 
         <Table.Body>
           {Object.keys(tableValues).map(key =>
-            <Table.Row key={tableValues[key]['id']}>
+            <Table.Row onClick={() => navigate('/show/' + tableValues[key]['id'])} key={tableValues[key]['id']}>
               <Table.Cell>{tableValues[key]['id']}</Table.Cell>
               <Table.Cell>{tableValues[key]['ip']}</Table.Cell>
               <Table.Cell>{tableValues[key]['power']}</Table.Cell>
@@ -53,7 +55,7 @@ const AsicTable = (props) => {
               <Table.Cell className={tableValues[key]['online'] === 'True' ? '' : 'negative'}>
                 {tableValues[key]['online'] === 'True' ? 'Online' : 'Offline'}
               </Table.Cell>
-              <Table.Cell style={{ maxWidth: '250px', minWidth: '180px' }}>
+              <Table.Cell style={{ minWidth: '180px' }}>
                 <Grid textAlign='center'>
                   <Button href={'/edit/' + tableValues[key]['id']} icon labelPosition='left' floated='left' size='mini'>
                     <Icon name='edit' />
