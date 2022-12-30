@@ -9,7 +9,7 @@ const AppHeader = () => (
         ASIC power dashboard
       </Menu.Item>
       <Menu.Item as="a" href="/">Home</Menu.Item>
-      <Menu.Item as="a">CRUD</Menu.Item>
+      <Menu.Item as="a" href="/crud/">CRUD</Menu.Item>
     </Container>
   </Menu>
 );
