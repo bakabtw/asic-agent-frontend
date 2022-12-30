@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid, Header, Image, Form, Segment } from 'semantic-ui-react';
 import AppMessages from './AppMessages';
 
 const AsicCrudComponent = ({ asicData, apiHost, addMessage, deleteMessage, messageQueue }) => {
   const [formData, setFormData] = useState({});
   const [loadingForm, setLoadingForm] = useState(false);
+
+  // Waiting until fetching asicData from API
+  useEffect(() => {
+    setFormData(asicData);
+  }, [asicData]);
 
   const handleSubmitButton = () => {
     setLoadingForm(true);
@@ -38,7 +43,7 @@ const AsicCrudComponent = ({ asicData, apiHost, addMessage, deleteMessage, messa
       .then(response => response.json())
       .then((data) => {
 
-        if (data['success'] === true) { addMessage('success', 'Submitted power data successfully') }
+        if (!(data['detail'])) { addMessage('success', 'Submitted power data successfully') }
         else { addMessage('warning', 'Error submitting data: ' + data['detail']) }
       })
       .catch((error) => {
