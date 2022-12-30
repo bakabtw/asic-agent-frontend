@@ -4,7 +4,7 @@ import AppMessages from '../Components/AppMessages';
 
 const CrudPage = (props) => {
   const [formData, setFormData] = useState({
-    'id': 0,
+    'id': '',
     'ip': '',
     'port': '',
     'username': '',
@@ -59,7 +59,7 @@ const CrudPage = (props) => {
     <Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
       <Grid.Column style={{ maxWidth: '750px' }}>
         <Header as='h2' color='teal' textAlign='center'>
-          <Image src='/logo512.png' /> ASIC power dashboard
+          <Image src='/mining.png' /> ASIC power dashboard
         </Header>
         <Segment stacked>
           <Form loading={loadingForm}>

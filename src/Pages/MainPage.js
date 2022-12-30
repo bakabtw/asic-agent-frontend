@@ -77,7 +77,7 @@ const MainPage = (props) => {
       <Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h2' color='teal' textAlign='center'>
-            <Image src='/logo512.png' /> ASIC power dashboard
+            <Image src='/mining.png' /> ASIC power dashboard
           </Header>
           <Form loading={loadingForm}>
             <Segment stacked>
