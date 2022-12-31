@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Menu, Image } from "semantic-ui-react";
-import ThemeContext from "../Context/ThemeContext";
 
 const AppHeader = () => {
-  const theme = useContext(ThemeContext);
-
   return (
-    <Menu fixed="top" inverted={!theme}>
+    <Menu fixed="top" inverted>
       <Container>
         <Menu.Item as="a" header href="/">
           <Image size="mini" src="/logo512.png" style={{ marginRight: '1.5em' }} />

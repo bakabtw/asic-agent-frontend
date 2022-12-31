@@ -2,31 +2,31 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react';
 import AppMessages from '../Components/AppMessages';
 import AsicTable from '../Components/AsicTable';
-// import ThemeContext from '../Context/ThemeContext';
+import MessageContext from '../Context/MessageContext';
 
-const MainPage = (props) => {
+const MainPage = () => {
   const [availablePower, setAvailablePower] = useState(-1);
   const [powerValue, setPowerValue] = useState('');
   const [loadingForm, setLoadingForm] = useState(false);
 
-  // const theme = useContext(ThemeContext);
+  const { apiHost, addMessage } = useContext(MessageContext);
 
   const getPowerData = () => {
     setLoadingForm(true);
 
-    fetch(props.apiHost + '/get_power')
+    fetch(apiHost + '/get_power')
       .then(response => response.json())
       .then((data) => {
 
         if (data['success'] === true) { setAvailablePower(data.power); }
         else {
-          props.addMessage('warning', 'Error updating data: ' + data['detail']);
+          addMessage('warning', 'Error updating data: ' + data['detail']);
           setAvailablePower(-1);
         }
 
       })
       .catch((error) => {
-        props.addMessage('warning', 'Error updating data: ' + error)
+        addMessage('warning', 'Error updating data: ' + error)
       })
       .finally( () =>
         setLoadingForm(false)
@@ -34,17 +34,17 @@ const MainPage = (props) => {
   }
 
   const sendPowerData = (power) => {
-    fetch(props.apiHost + '/set_power/' + power, {
+    fetch(apiHost + '/set_power/' + power, {
       'method': 'POST',
     })
       .then(response => response.json())
       .then((data) => {
 
-        if (data['success'] === true) { props.addMessage('success', 'Submitted power data successfully') }
-        else { props.addMessage('warning', 'Error submitting data: ' + data['detail']) }
+        if (data['success'] === true) { addMessage('success', 'Submitted power data successfully') }
+        else { addMessage('warning', 'Error submitting data: ' + data['detail']) }
       })
       .catch((error) => {
-        props.addMessage('warning', 'Error submitting data: ' + error)
+        addMessage('warning', 'Error submitting data: ' + error)
       });
   }
 
@@ -98,13 +98,13 @@ const MainPage = (props) => {
               </Grid>
             </Segment>
           </Form>
-          <AppMessages queue={props.messageQueue} deleteMessage={props.deleteMessage} />
+          <AppMessages />
           <Message>
             Available power: {availablePower < 0 ? 'Updating...' : availablePower + 'W'}
           </Message>
         </Grid.Column>
       </Grid>
-      <AsicTable apiHost={props.apiHost} addMessage={props.addMessage} />
+      <AsicTable />
     </>
   );
 }

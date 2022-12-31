@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import AsicCrudComponent from '../Components/AsicCrudComponent';
+import MessageContext from '../Context/MessageContext';
 
-const CrudPage = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) => {
+const CrudPage = ({ action }) => {
   const params = useParams();
   const [asicData, setAsicData] = useState({
     'id': 0,
@@ -14,6 +15,7 @@ const CrudPage = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) 
     'power': '',
     'phase': ''
   });
+  const { apiHost, addMessage } = useContext(MessageContext);
 
   useEffect(() => {
     if (action === 'edit') {
@@ -34,7 +36,7 @@ const CrudPage = ({ action, apiHost, addMessage, deleteMessage, messageQueue }) 
   }, []);
 
   return (
-    <AsicCrudComponent action={action} asicData={asicData} apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
+    <AsicCrudComponent action={action} asicData={asicData} />
   );
 }
 

@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Grid, Header, Image, Form, Segment } from 'semantic-ui-react';
 import AppMessages from './AppMessages';
+import MessageContext from '../Context/MessageContext';
 
-const AsicCrudComponent = ({ action, asicData, apiHost, addMessage, deleteMessage, messageQueue }) => {
+const AsicCrudComponent = ({ action, asicData }) => {
   const [formData, setFormData] = useState({});
   const [loadingForm, setLoadingForm] = useState(false);
+  const { apiHost, addMessage } = useContext(MessageContext);
 
   // Waiting until fetching asicData from API
   useEffect(() => {
@@ -100,7 +102,7 @@ const AsicCrudComponent = ({ action, asicData, apiHost, addMessage, deleteMessag
               <Form.Button onClick={handleSubmitButton}>Submit</Form.Button>
             </Form>
           </Segment>
-          <AppMessages queue={messageQueue} deleteMessage={deleteMessage} />
+          <AppMessages />
         </Grid.Column>
       </Grid>)
   );

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Button, Table, Icon } from 'semantic-ui-react';
+import MessageContext from '../Context/MessageContext';
 
-const AsicTable = (props) => {
+const AsicTable = () => {
   const [tableValues, setTableValues] = useState([]);
+  const { apiHost, addMessage } = useContext(MessageContext);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -16,16 +19,16 @@ const AsicTable = (props) => {
   }, []);
 
   const updateTable = () => {
-    fetch(props.apiHost + '/asic_status')
+    fetch(apiHost + '/asic_status')
       .then((response) => response.json())
       .then((data) => {
 
         if (!data['detail']) { setTableValues(data); }
-        else { props.addMessage('warning', 'Error updating table data: ' + data['detail']); }
+        else { addMessage('warning', 'Error updating table data: ' + data['detail']); }
 
       })
       .catch((error) => {
-        props.addMessage('warning', 'Error updating table data: ' + error);
+        addMessage('warning', 'Error updating table data: ' + error);
       });
   }
 

@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Segment, Grid, Header, Container, Divider } from 'semantic-ui-react';
 import CrudPage from './CrudPage';
+import MessageContext from '../Context/MessageContext';
 
-const AsicStats = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
+const AsicStats = () => {
   const [stats, setStats] = useState({});
   const params = useParams();
+  const { apiHost, addMessage } = useContext(MessageContext);
 
   const getStats = () => {
     fetch(apiHost + '/get_stats/' + params.asicID)
@@ -27,7 +29,7 @@ const AsicStats = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
 
   return (
     <>
-      <CrudPage action='edit' apiHost={apiHost} addMessage={addMessage} deleteMessage={deleteMessage} messageQueue={messageQueue} />
+      <CrudPage action='edit' />
       <Grid textAlign='center' style={{ padding: '0em 0em 5em 0em' }}>
         <Segment loading>
           <Header as='h1' textAlign='left'>Action buttons</Header>
