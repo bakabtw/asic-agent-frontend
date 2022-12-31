@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Header, Segment, Image, Button } from 'semantic-ui-react';
 import AppMessages from "./AppMessages";
+import MessageContext from "../Context/MessageContext";
 
-const DeleteConfimation = ({ apiHost, addMessage, deleteMessage, messageQueue }) => {
+const DeleteConfimation = () => {
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 	const params = useParams();
+	const { apiHost, addMessage } = useContext(MessageContext);
 
 	const handleYesButton = () => {
 		setLoading(true);
@@ -17,13 +19,13 @@ const DeleteConfimation = ({ apiHost, addMessage, deleteMessage, messageQueue })
 			.then(response => response.json())
 			.then((data) => {
 
-				if (!(data['detail'])) { addMessage('success', 'Submitted power data successfully') }
-				else { addMessage('warning', 'Error submitting data: ' + data['detail']) }
+				if (!(data['detail'])) { addMessage('success', 'Deleted successfully') }
+				else { addMessage('warning', 'Error during deleting: ' + data['detail']) }
 			})
 			.catch((error) => {
-				addMessage('warning', 'Error submitting data: ' + error)
+				addMessage('warning', 'Error during deletin: ' + error)
 			})
-			.finally(() =>{
+			.finally(() => {
 				setLoading(false);
 			});
 
@@ -34,7 +36,7 @@ const DeleteConfimation = ({ apiHost, addMessage, deleteMessage, messageQueue })
 		<Grid textAlign='center' style={{ padding: '10em 5em 5em 5em' }}>
 			<Grid.Column style={{ maxWidth: '50%' }}>
 				<Segment loading={loading}>
-					<Header as='h1' textAlign='center' floated>Uh-oh... You're trying to delete an entry</Header>
+					<Header as='h1' textAlign='center'>Uh-oh... You're trying to delete an entry</Header>
 					<Header as='h2' textAlign='center'>Are you sure about it?</Header>
 					<Image src='/delete_confirmation.jpeg' style={{ padding: '1em 0em 3em 0em' }} centered />
 					<Grid textAlign='center' style={{ padding: '2em 0em 2em 0em' }}>
@@ -42,7 +44,7 @@ const DeleteConfimation = ({ apiHost, addMessage, deleteMessage, messageQueue })
 						<Button onClick={() => navigate('/')} positive>No, take me back</Button>
 					</Grid>
 				</Segment>
-				<AppMessages queue={messageQueue} deleteMessage={deleteMessage} />
+				<AppMessages />
 			</Grid.Column>
 		</Grid>
 	);
