@@ -81,7 +81,7 @@ const MainPage = () => {
           </Header>
           <Form loading={loadingForm}>
             <Segment stacked>
-              <Form.Input onChange={evt => setPowerValue(evt.target.value)} fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
+              <Form.Input onChange={evt => setPowerValue(evt.target.value)} type='number' fluid icon='power' iconPosition='left' placeholder='Available power (W)' />
               <Grid divided='vertically'>
                 <GridRow columns={2}>
                   <Grid.Column>
