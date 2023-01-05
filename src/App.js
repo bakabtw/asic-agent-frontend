@@ -15,9 +15,9 @@ const App = () => {
   const addMessage = (status, message) => {
     setMessageQueue(
       currentQueue => {
-        // const id = currentQueue[currentQueue.length - 1]['id'] + 1;
         const lastIndex = currentQueue.length === 0 ? 0 : currentQueue.length - 1;
         const id = currentQueue[lastIndex] ? currentQueue[lastIndex]['id'] + 1 : 1;
+        setTimeout(() => deleteMessage(id), 5000);
 
         return ([...currentQueue, { id, status, message }]);
       }
@@ -26,7 +26,9 @@ const App = () => {
 
   const deleteMessage = (id) => {
     setMessageQueue(
-      messageQueue.filter(item => item.id !== id)
+      currentQueue => {
+        return currentQueue.filter(item => item.id !== id);;
+      }
     );
   }
 
