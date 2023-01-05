@@ -44,6 +44,7 @@ const DeleteConfimation = () => {
 						<Button onClick={() => navigate('/')} positive>No, take me back</Button>
 					</Grid>
 				</Segment>
+				<AppMessages />
 			</Grid.Column>
 		</Grid>
 	);
