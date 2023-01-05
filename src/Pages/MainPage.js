@@ -70,7 +70,7 @@ const MainPage = () => {
   }
 
   const checkInputValue = () => {
-    if (Number.isInteger(powerValue) && powerValue > 0)
+    if (powerValue > 0)
       return true;
     else
       return false;
