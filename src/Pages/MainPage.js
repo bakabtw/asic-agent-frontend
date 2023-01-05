@@ -54,13 +54,26 @@ const MainPage = () => {
   }
 
   const handleSubmitButton = () => {
-    resetPowerData();
-    sendPowerData(powerValue);
-    getPowerData();
+    if (checkInputValue()) {
+      resetPowerData();
+      sendPowerData(powerValue);
+      getPowerData();
+    }
+    else
+    {
+      addMessage('warning', 'Please check the input value. It can be a number above greater than 0.');
+    }
   }
 
   const resetPowerData = () => {
     setAvailablePower(-1);
+  }
+
+  const checkInputValue = () => {
+    if (Number.isInteger(powerValue) && powerValue > 0)
+      return true;
+    else
+      return false;
   }
 
   useEffect(() => {
