@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Grid, Header, Segment, Image, Button } from 'semantic-ui-react';
-import AppMessages from "./AppMessages";
 import MessageContext from "../Context/MessageContext";
 
 const DeleteConfimation = () => {
@@ -44,7 +43,6 @@ const DeleteConfimation = () => {
 						<Button onClick={() => navigate('/')} positive>No, take me back</Button>
 					</Grid>
 				</Segment>
-				<AppMessages />
 			</Grid.Column>
 		</Grid>
 	);
