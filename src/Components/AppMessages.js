@@ -5,17 +5,21 @@ import ThemeContext from '../Context/MessageContext';
 const AppMessages = () => {
   const { messageQueue, deleteMessage } = useContext(ThemeContext);
 
-  const handleClose = (id) => {
+  const handleDismiss = (id) => {
     deleteMessage(id);
   }
 
   return (
     Object.keys(messageQueue).map(key =>
     (
-      <Message key={key} className={messageQueue[key]['status']}>
-        <p>ID: {messageQueue[key]['id']} | {messageQueue[key]['message']}</p>
-        <button onClick={evt => handleClose(messageQueue[key]['id'])}>Close</button>
-      </Message >
+      <Message
+        onDismiss={() => handleDismiss(messageQueue[key]['id'])}
+        key={key}
+        className={messageQueue[key]['status']}
+        icon={messageQueue[key]['status'] === 'warning' ? 'exclamation triangle' : 'thumbs up'}
+        header={messageQueue[key]['status'] === 'warning' ? 'Error' : 'Success'}
+        content={messageQueue[key]['message']}
+      />
     )
     )
   );
