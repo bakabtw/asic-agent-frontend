@@ -36,5 +36,5 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:latest
-          build-arg: |
+          build-args: |
             REACT_APP_API_HOST=https://power.knst.me/api
