@@ -34,7 +34,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          platforms: linux/amd64, linux/arm64, linux/arm/v7
+          platforms: linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:production
-          build-args: |
-            REACT_APP_API_HOST=http://localhost:8000

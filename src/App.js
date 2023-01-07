@@ -10,7 +10,7 @@ import MessageContext from './Context/MessageContext';
 
 const App = () => {
   const [messageQueue, setMessageQueue] = useState([]);
-  const apiHost = process.env.REACT_APP_API_HOST ? process.env.REACT_APP_API_HOST : 'https://power.knst.me/api';
+  const apiHost = process.env.REACT_APP_API_HOST ? process.env.REACT_APP_API_HOST : 'http://' + window.location.hostname + ':8000';
 
   const addMessage = (status, message) => {
     setMessageQueue(
