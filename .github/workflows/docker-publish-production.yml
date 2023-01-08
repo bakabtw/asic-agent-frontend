@@ -62,7 +62,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          working-directory: asic-agent-frontend-build
           context: .
           file: ./Dockerfile.prod
           push: true
