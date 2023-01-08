@@ -24,6 +24,8 @@ jobs:
       - 
         name: Generate build
         run: yarn run build
+        env:
+          CI=false
       - 
         name: Share artifact inside workflow
         uses: actions/upload-artifact@v3
