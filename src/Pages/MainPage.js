@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow } from 'semantic-ui-react';
+import { Button, Grid, Header, Image, Message, Form, Segment, GridColumn, GridRow, Divider } from 'semantic-ui-react';
 import AppMessages from '../Components/AppMessages';
 import AsicTable from '../Components/AsicTable';
 import MessageContext from '../Context/MessageContext';
 
 const MainPage = () => {
   const [availablePower, setAvailablePower] = useState(-1);
+  const [activePower, setActivePower] = useState(-1);
   const [powerValue, setPowerValue] = useState('');
   const [loadingForm, setLoadingForm] = useState(false);
 
@@ -28,7 +29,22 @@ const MainPage = () => {
       .catch((error) => {
         addMessage('warning', 'Error updating data: ' + error)
       })
-      .finally( () =>
+
+    fetch(apiHost + '/get_active_power')
+      .then(response => response.json())
+      .then((data) => {
+
+        if (data['success'] === true) { setActivePower(data.power); }
+        else {
+          addMessage('warning', 'Error updating data: ' + data['detail']);
+          setActivePower(-1);
+        }
+
+      })
+      .catch((error) => {
+        addMessage('warning', 'Error updating data: ' + error)
+      })
+      .finally(() =>
         setLoadingForm(false)
       );
   }
@@ -58,15 +74,14 @@ const MainPage = () => {
       resetPowerData();
       sendPowerData(powerValue);
       getPowerData();
-    }
-    else
-    {
+    } else {
       addMessage('warning', 'Please check the input value. It can be a number above greater than 0.');
     }
   }
 
   const resetPowerData = () => {
     setAvailablePower(-1);
+    setActivePower(-1);
   }
 
   const checkInputValue = () => {
@@ -113,7 +128,9 @@ const MainPage = () => {
           </Form>
           <AppMessages />
           <Message>
-            Available power: {availablePower < 0 ? 'Updating...' : availablePower + 'W'}
+            <p>Available power: {availablePower < 0 ? 'Updating...' : availablePower + 'W'}</p>
+            <Divider />
+            <p>Active power: {activePower < 0 ? 'Updating...' : activePower + 'W'}</p>
           </Message>
         </Grid.Column>
       </Grid>
