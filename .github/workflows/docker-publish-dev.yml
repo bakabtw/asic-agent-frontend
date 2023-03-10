@@ -26,6 +26,7 @@ jobs:
         run: yarn run build
         env:
           CI: false
+          REACT_APP_API_HOST: https://power-api.knst.me/
       - 
         name: Share artifact inside workflow
         uses: actions/upload-artifact@v3
@@ -67,5 +68,3 @@ jobs:
           push: true
           platforms: linux/amd64, linux/arm64, linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:dev
-          build-args: |
-            REACT_APP_API_HOST=https://power-api.knst.me/
