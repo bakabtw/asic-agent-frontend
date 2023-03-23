@@ -75,7 +75,7 @@ const MainPage = () => {
       sendPowerData(powerValue);
       getPowerData();
     } else {
-      addMessage('warning', 'Please check the input value. It can be a number above greater than 0.');
+      addMessage('warning', 'Please check the input value. It should be >= 0.');
     }
   }
 
@@ -85,7 +85,7 @@ const MainPage = () => {
   }
 
   const checkInputValue = () => {
-    if (powerValue > 0)
+    if (powerValue >= 0)
       return true;
     else
       return false;
