@@ -1,10 +1,10 @@
 name: Production build
 
 on:
+  workflow_dispatch:
+
   release:
     types: [published]
-
-  workflow_dispatch:
 
 jobs:
   build:
@@ -66,4 +66,6 @@ jobs:
           file: ./asic-agent-frontend-build/Dockerfile.prod
           push: true
           platforms: linux/amd64, linux/arm64, linux/arm/v7
-          tags: ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:production
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:production
+            ${{ secrets.DOCKER_USERNAME }}/asic-agent-frontend:${{ github.event.release.tag_name }}
