@@ -26,6 +26,7 @@ jobs:
         run: yarn run build
         env:
           CI: false
+          REACT_APP_API_HOST: https://power-api.app.enelt.com
       - 
         name: Share artifact inside workflow
         uses: actions/upload-artifact@v3
